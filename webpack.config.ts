@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
 import type { Configuration } from "webpack";
 
@@ -13,6 +14,7 @@ interface EnvVariables {
 
 export default (env: EnvVariables) => {
     const isDev = env.mode === 'development';
+    const isProd = env.mode === 'production';
     const devServer: DevServerConfiguration = {};
 
     const config: Configuration = {
@@ -21,10 +23,18 @@ export default (env: EnvVariables) => {
         module: {
             rules: [
                 {
+                    test: /\.s[ac]ss$/i,
+                    use: [
+                        isDev ? 'style-loader' :MiniCssExtractPlugin.loader,
+                        "css-loader",
+                        "sass-loader",
+                    ],
+                },
+                {
                     test: /\.tsx?$/,
                     use: 'ts-loader',
                     exclude: /node_modules/,
-                },
+                }
             ],
         },
         resolve: {
@@ -40,6 +50,10 @@ export default (env: EnvVariables) => {
                 { template: path.resolve(__dirname, 'public', 'index.html') }
             ),
             isDev && new webpack.ProgressPlugin(),
+            isProd && new MiniCssExtractPlugin({
+                filename: 'css/[name].[contenthash:8].css',
+                chunkFilename: 'css/[name].[contenthash:8].css',
+            })
         ].filter(Boolean),
         devServer: isDev ? {
             port: env.port ?? 6783,
