@@ -1,3 +1,3 @@
 import {calc} from './calc';
 
-console.log(calc(5, 10))
+console.log(calc(5, 15))
