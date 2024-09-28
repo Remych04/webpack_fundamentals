@@ -10,8 +10,13 @@ export function App() {
 
   const increment = () => setCounter((prev) => prev + 1);
 
+  if(__PLATFORM__ === 'mobile'){
+    return <div>mobile</div>
+  }
+
   return (
     <div>
+      <h1>Platform: {__PLATFORM__}</h1>
       <div>
         <img width={100} height={100} src={jpeg} alt="" />
         <img width={100} height={100} src={png} alt="" />
