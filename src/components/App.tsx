@@ -18,7 +18,7 @@ export function App() {
     return <div>mobile</div>;
   }
 
-  Todo("123")
+  // Todo("123")
 
   return (
     <div>
