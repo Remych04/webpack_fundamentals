@@ -1,9 +1,9 @@
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { Configuration, DefinePlugin, ProgressPlugin } from "webpack";
 import { BuildOptions } from "./types/types";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
-import { platform } from "os";
 
 export function buildPlugins(options: BuildOptions): Configuration['plugins'] {
     const isDev = options.mode === 'development';
@@ -20,7 +20,8 @@ export function buildPlugins(options: BuildOptions): Configuration['plugins'] {
 
     if (isDev) {
         plugins.push(
-            new ProgressPlugin()
+            new ProgressPlugin(),
+            new ForkTsCheckerWebpackPlugin(),
         )
     }
 
@@ -33,7 +34,7 @@ export function buildPlugins(options: BuildOptions): Configuration['plugins'] {
         )
     }
 
-    if(options.analyzer){
+    if (options.analyzer) {
         plugins.push(new BundleAnalyzerPlugin())
     }
 

@@ -5,14 +5,20 @@ import jpeg from "@/assets/assetjpg.jpg";
 import png from "@/assets/assetpng.png";
 import Svg from "@/assets/assetsvg.svg";
 
+function Todo(a: number) {
+  console.log("TODO: " + a);
+}
+
 export function App() {
   const [counter, setCounter] = useState<number>(0);
 
   const increment = () => setCounter((prev) => prev + 1);
 
-  if(__PLATFORM__ === 'mobile'){
-    return <div>mobile</div>
+  if (__PLATFORM__ === "mobile") {
+    return <div>mobile</div>;
   }
+
+  Todo("123")
 
   return (
     <div>

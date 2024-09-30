@@ -5,10 +5,10 @@
   "scripts": {
     "start": "webpack serve --env mode=development",
     "build:dev": "webpack --env mode=development",
-    "build:prod": "webpack --env mode=production",
+    "build:prod": "tsc && webpack --env mode=production",
     "analyzer": "webpack --env mode=production analyzer=true",
-    "build:mobile": "webpack --env mode=production --env platform=mobile",
-    "build:desktop": "webpack --env mode=production --env platform=desktop"
+    "build:mobile": "tsc && webpack --env mode=production --env platform=mobile",
+    "build:desktop": "tsc && webpack --env mode=production --env platform=desktop"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,7 @@
     "@types/webpack": "^5.28.5",
     "@types/webpack-bundle-analyzer": "^4.7.0",
     "css-loader": "^7.1.2",
+    "fork-ts-checker-webpack-plugin": "^9.0.2",
     "html-webpack-plugin": "^5.6.0",
     "mini-css-extract-plugin": "^2.9.1",
     "sass": "^1.79.3",
