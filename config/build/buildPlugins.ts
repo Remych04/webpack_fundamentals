@@ -5,6 +5,7 @@ import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 import { Configuration, DefinePlugin, ProgressPlugin } from "webpack";
 import { BuildOptions } from "./types/types";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import path from "path";
 
 export function buildPlugins(options: BuildOptions): Configuration['plugins'] {
     const isDev = options.mode === 'development';
@@ -12,7 +13,10 @@ export function buildPlugins(options: BuildOptions): Configuration['plugins'] {
 
     const plugins: Configuration['plugins'] = [
         new HtmlWebpackPlugin(
-            { template: options.paths.html }
+            {
+                template: options.paths.html,
+                favicon: path.resolve(options.paths.public, 'favicon.ico'),
+            }
         ),
         new DefinePlugin({
             __PLATFORM__: JSON.stringify(options.platform)
