@@ -21,7 +21,7 @@ export function App() {
   // Todo("123")
 
   return (
-    <div>
+    <div data-testid={'App.BlockTestId'}>
       <h1>Platform: {__PLATFORM__}</h1>
       <div>
         <img width={100} height={100} src={jpeg} alt="" />
